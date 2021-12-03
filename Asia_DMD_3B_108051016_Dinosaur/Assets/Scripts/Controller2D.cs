@@ -20,9 +20,14 @@ public class Controller2D : MonoBehaviour
     [Header("跳躍按鍵與可跳躍圖層")]
     public KeyCode keyjump = KeyCode.Space;
     public LayerMask canJumpLayer;
+    [Header("動畫參數 : 走路與跳躍")]
+    public string parameterWalk = "開關走路";
+    public string paramterJump = "開關跳躍";
+
     #endregion
 
     #region  欄位:私人
+    private Animator ani;
     /// <summary>
     /// 鋼體元件 Rigidbody 2D
     /// </summary>
@@ -55,6 +60,7 @@ public class Controller2D : MonoBehaviour
     {
         //鋼體欄位 = 取得元件<2D 鋼體>()
         rig = GetComponent<Rigidbody2D>();
+        ani = GetComponent<Animator>();
     }
     /// <summary>
     /// Update 約 60 FPS
@@ -87,6 +93,10 @@ public class Controller2D : MonoBehaviour
 
         //剛體元件.加速度 = 新 二維向量(h 值 * 移動速度, 0);
         rig.velocity = new Vector2(h * speed, rig.velocity.y);
+
+        //
+        ani.SetBool(parameterWalk, h != 0);
+    
     }
 
     /// <summary>
@@ -123,6 +133,8 @@ public class Controller2D : MonoBehaviour
         // print("碰到的物件名稱:" + hit.name);
 
         isGround = hit;
+
+        ani.SetBool(paramterJump, !isGround);
 
     }
     private void Jamp()
