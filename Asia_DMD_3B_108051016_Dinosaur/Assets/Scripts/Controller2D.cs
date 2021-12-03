@@ -4,8 +4,9 @@ using UnityEngine;
 /// 控制器:2D橫向卷軸版本
 /// </summary>
 public class Controller2D : MonoBehaviour
+
+
 {
-   
 
     #region 欄位:公開
     [Header("移動速度"), Range(0, 500)]
@@ -21,12 +22,20 @@ public class Controller2D : MonoBehaviour
     public LayerMask canJumpLayer;
     #endregion
 
-
+    #region  欄位:私人
     /// <summary>
     /// 鋼體元件 Rigidbody 2D
     /// </summary>
     private Rigidbody2D rig;
 
+    //將私人欄位顯示在屬性版上
+    [SerializeField]
+
+
+    private bool isGround;
+    #endregion
+
+    #region 事件
     /// <summary>
     /// 繪製圖示
     /// 在 Unity 繪製輔助用的圖示
@@ -60,7 +69,10 @@ public class Controller2D : MonoBehaviour
     private void Update()
     {
         Flip();
+        CheckGround();
+        Jamp();
     }
+    #endregion
 
     #region 方法
     /// <summary>
@@ -71,7 +83,7 @@ public class Controller2D : MonoBehaviour
     {
         // h 值 =指定為 輸入軸向(水平軸) - 水平軸代表左右鍵與AD      
         float h = Input.GetAxis("Horizontal");
-        print("玩家左右按鍵值:" + h);
+        //print("玩家左右按鍵值:" + h);
 
         //剛體元件.加速度 = 新 二維向量(h 值 * 移動速度, 0);
         rig.velocity = new Vector2(h * speed, rig.velocity.y);
@@ -85,7 +97,7 @@ public class Controller2D : MonoBehaviour
     private void Flip()
     {
         float h = Input.GetAxis("Horizontal");
-        
+
         //如果 h 值小於0 左 : 角度 Y 180
         if (h < 0)
         {
@@ -96,7 +108,33 @@ public class Controller2D : MonoBehaviour
         {
             transform.eulerAngles = Vector3.zero;
         }
+
     }
+
+    /// <summary>
+    /// 檢查是否在地板
+    /// </summary>
+    private void CheckGround()
+    {
+        //碰撞資訊 = 2D 物理,覆蓋圖層(中心點,半徑,圖層)
+        Collider2D hit = Physics2D.OverlapCircle(transform.position +
+            transform.TransformDirection(checkGroundOffset), checkGroundRadius, canJumpLayer);
+
+        // print("碰到的物件名稱:" + hit.name);
+
+        isGround = hit;
+
+    }
+    private void Jamp()
+    {
+        //如果角色在地板上 並且 按下指定按鍵
+        if (isGround && Input.GetKeyDown(keyjump))
+        {
+            //剛體,添加推力(二維向量)
+            rig.AddForce(new Vector2(0, jump));    
+        }
+
+     }
     #endregion
 
 
