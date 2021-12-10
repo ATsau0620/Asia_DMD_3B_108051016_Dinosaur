@@ -7377,7 +7377,7 @@ GameObject:
   - component: {fileID: 1345874486}
   - component: {fileID: 1345874485}
   m_Layer: 0
-  m_Name: "\u5C0D\u8A71"
+  m_Name: "\u5C0D\u8A71\u7CFB\u7D71"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7396,6 +7396,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interval: 0.3
+  goDialogue: {fileID: 799436370}
+  textContent: {fileID: 987703582}
 --- !u!4 &1345874486
 Transform:
   m_ObjectHideFlags: 0
