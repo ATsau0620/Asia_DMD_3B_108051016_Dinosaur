@@ -16,25 +16,46 @@ public class DialogueSystem : MonoBehaviour
     public GameObject goDialogue;
     [Header("對話內容")]
     public Text textContent;
+    [Header("完成對話圖示")]
+    public GameObject goTip;
+    [Header("對話按鍵")]
+    public KeyCode keyDialogue = KeyCode.Mouse0;
 
     private void Start()
     {
-        StartCoroutine(TypeEffect());
+        //StartCoroutine(TypeEffect());
     }
-    private IEnumerator TypeEffect()
+    private IEnumerator TypeEffect(string[] contents)
     {
-        string test = "哈囉，你好~";
+        //更換名稱快捷鍵 ctrl+ R R 
+        //測試用
+        //string test1 = "哈囉，你好~";
+        //string test2 = "第二段對話~";
+        //string[] contents = { test1, test2 }; 
 
-        textContent.text = "";            //清除上次對話內容 
         goDialogue.SetActive(true);       //顯示對話物件
 
-        for (int i = 0; i < test.Length; i++) 
+        for (int j = 0; j < contents.Length; j++)
         {
-            //print(test[i]);
-            textContent.text += test[i];  //疊加對話內容的文字
-            yield return new WaitForSeconds(interval);
+            textContent.text = "";            //清除上次對話內容 
+            goTip.SetActive(false);
+            
+            for (int i = 0; i < contents[j].Length; i++)
+            {
+                //print(test[i]);
+                textContent.text += contents[j][i];  //疊加對話內容的文字
+                yield return new WaitForSeconds(interval);
+            }
+
+            goTip.SetActive(true);
+
+            while(!Input.GetKeyDown(keyDialogue))
+            {
+                yield return null; 
+            }
         }
 
+        goDialogue.SetActive(false);
     }
 
 }
