@@ -7275,6 +7275,7 @@ GameObject:
   - component: {fileID: 1266122170}
   - component: {fileID: 1266122169}
   - component: {fileID: 1266122168}
+  - component: {fileID: 1266122171}
   m_Layer: 0
   m_Name: "\u9AB7\u9ACF"
   m_TagString: Untagged
@@ -7366,6 +7367,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1266122171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266122167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a75802ac04630ef45a019c06ad89706a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  v3TrackSize: {x: 1, y: 1, z: 1}
+  v3TrackOffset: {x: 0, y: 0, z: 0}
+  speed: 1.5
+  layerTarget:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1345874484
 GameObject:
   m_ObjectHideFlags: 0
@@ -7395,7 +7414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fcff3492635fc84db99e4380b73c327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interval: 0.15
+  interval: 0.08
   goDialogue: {fileID: 799436370}
   textContent: {fileID: 987703582}
   goTip: {fileID: 1710043367}
@@ -8220,6 +8239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataDialogue: {fileID: 11400000, guid: f94567b3ffd14f74da1c85ca4ecd54a1, type: 2}
   dialogueSystem: {fileID: 1345874485}
+  target: "\u5C0F\u6050\u9F8D"
 --- !u!1 &1509298779
 GameObject:
   m_ObjectHideFlags: 0
