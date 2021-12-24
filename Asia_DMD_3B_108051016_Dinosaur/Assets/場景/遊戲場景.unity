@@ -1278,7 +1278,7 @@ GameObject:
   - component: {fileID: 445780865}
   - component: {fileID: 445780864}
   - component: {fileID: 445780866}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: "\u5C0F\u6050\u9F8D"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7379,12 +7379,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a75802ac04630ef45a019c06ad89706a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  v3TrackSize: {x: 1, y: 1, z: 1}
-  v3TrackOffset: {x: 0, y: 0, z: 0}
+  v3TrackSize: {x: 5, y: 3.5, z: 1}
+  v3TrackOffset: {x: -2.5, y: 1, z: 0}
   speed: 1.5
   layerTarget:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!1 &1345874484
 GameObject:
   m_ObjectHideFlags: 0
@@ -8212,7 +8212,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0620749, y: 0.56902313}
+  m_Offset: {x: -0.3787694, y: 0.67458797}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -8223,7 +8223,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.5725732, y: 2.765594}
+  m_Size: {x: 4.9976997, y: 2.9767237}
   m_EdgeRadius: 0
 --- !u!114 &1474416191
 MonoBehaviour:
