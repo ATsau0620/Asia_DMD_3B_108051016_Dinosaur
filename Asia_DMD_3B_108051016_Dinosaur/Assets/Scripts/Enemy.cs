@@ -11,11 +11,19 @@ public class Enemy : MonoBehaviour
     public float speed = 1.5f;
     [Header("目標圖層")]
     public LayerMask layerTarget;
+    [Header("動畫參數")]
+    public string parameterWalk = "開關走路";
 
+    private Rigidbody2D rig;
+    private Animator ani;
     #endregion
 
     #region 事件
-
+    private void Start()
+    {
+        rig = GetComponent<Rigidbody2D>();
+        ani = GetComponent<Animator>();
+    }
 
     private void OnDrawGizmos()
     {
@@ -32,6 +40,7 @@ public class Enemy : MonoBehaviour
 
     #endregion
 
+
     #region 方法
     /// <summary>
     /// 檢查目標是否在區域內
@@ -41,7 +50,13 @@ public class Enemy : MonoBehaviour
         //2D 物理.覆蓋盒型(中心，尺寸，角度)
         Collider2D hit = Physics2D.OverlapBox(transform.position + transform.TransformDirection(v3TrackOffset), v3TrackSize, 0, layerTarget);
 
-        if (hit) print(hit.name);
+        if (hit) Move(); 
+    }
+
+    private void Move()
+    {
+        rig.velocity = new Vector2(-speed, rig.velocity.y);
+        ani.SetBool(parameterWalk, true);
     }
 
     #endregion
