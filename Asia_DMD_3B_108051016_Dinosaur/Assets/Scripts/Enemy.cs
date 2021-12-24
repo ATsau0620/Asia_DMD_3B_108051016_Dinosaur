@@ -13,6 +13,10 @@ public class Enemy : MonoBehaviour
     public LayerMask layerTarget;
     [Header("動畫參數")]
     public string parameterWalk = "開關走路";
+    [Header("面向目標物件")]
+    public Transform target;
+
+    private float angle = 0;
 
     private Rigidbody2D rig;
     private Animator ani;
@@ -55,8 +59,31 @@ public class Enemy : MonoBehaviour
 
     private void Move()
     {
-        rig.velocity = new Vector2(-speed, rig.velocity.y);
+        ///三元運算子語法:布林值 ? 當布林值 為 ture : 當布林值 為 false ;
+        ///如果 目標的 X 小於 敵人的 X 就代表在左邊 角度 0
+        ///如果 目標的 X 大於 敵人的 X 就代表在右邊 角度 180
+
+        if (target.position.x > transform.position.x)
+        {
+            // 右邊 angle = 180
+        }
+        else if (target.position.x < transform.position.x)
+        {
+            //左邊 angle = 0
+        }
+
+        angle = target.position.x > transform.position.x ? 180 : 0;
+
+        transform.eulerAngles = Vector3.up * angle;
+
+        rig.velocity = transform.TransformDirection(new Vector2(-speed, rig.velocity.y));
+        
         ani.SetBool(parameterWalk, true);
+
+        // 距離 = 三維向量.距離(A點，B點)
+        float distance = Vector3.Distance(target.position, transform.position);
+        print("與目標的目標:" + distance);
+
     }
 
     #endregion

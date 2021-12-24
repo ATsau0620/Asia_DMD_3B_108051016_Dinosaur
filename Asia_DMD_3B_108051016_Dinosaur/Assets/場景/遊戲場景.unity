@@ -7381,12 +7381,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a75802ac04630ef45a019c06ad89706a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  v3TrackSize: {x: 5, y: 3.5, z: 1}
-  v3TrackOffset: {x: -2.5, y: 1, z: 0}
+  v3TrackSize: {x: 5, y: 6, z: 1}
+  v3TrackOffset: {x: -2.5, y: 2, z: 0}
   speed: 1.5
   layerTarget:
     serializedVersion: 2
     m_Bits: 64
+  parameterWalk: "\u958B\u95DC\u8D70\u8DEF"
+  target: {fileID: 445780863}
 --- !u!50 &1266122172
 Rigidbody2D:
   serializedVersion: 4
