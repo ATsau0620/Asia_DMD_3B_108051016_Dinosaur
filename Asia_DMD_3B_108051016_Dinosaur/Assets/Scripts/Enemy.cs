@@ -106,6 +106,9 @@ public class Enemy : MonoBehaviour
             Attack();
         }
     }
+    [Header("攻擊力"), Range(0, 100)]
+    public float attack = 35;
+
     private void Attack()
     {
         if (timerAttack < attackCD)
@@ -119,7 +122,7 @@ public class Enemy : MonoBehaviour
             timerAttack = 0;
             Collider2D hit = Physics2D.OverlapBox(transform.position +
             transform.TransformDirection(v3AttackOffset), v3AttackSize,0, layerTarget);
-            print("攻擊到物件:" + hit.name);
+            hit.GetComponent<HurtSystem>().Hurt(attack);
         }
     }
     #endregion
