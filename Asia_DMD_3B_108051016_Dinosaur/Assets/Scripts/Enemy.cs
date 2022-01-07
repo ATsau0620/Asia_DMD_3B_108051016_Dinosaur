@@ -13,13 +13,24 @@ public class Enemy : MonoBehaviour
     public LayerMask layerTarget;
     [Header("動畫參數")]
     public string parameterWalk = "開關走路";
+    public string parameterAttack = "觸發攻擊";
     [Header("面向目標物件")]
     public Transform target;
+    [Header("攻擊距離")]
+    public float attactDistance = 1.3f;
+    [Header("攻擊冷卻時間"),Range(0, 10)]
+    public float attackCD = 2.8f;
+    [Header("檢查攻擊區域大小與位移")]
+    public Vector3 v3AttackSize = Vector3.one;
+    public Vector3 v3AttackOffset;
 
     private float angle = 0;
 
     private Rigidbody2D rig;
     private Animator ani;
+    private float timerAttack;
+
+   
     #endregion
 
     #region 事件
@@ -35,6 +46,10 @@ public class Enemy : MonoBehaviour
         Gizmos.color = new Color(1, 0, 0, 0.3f);
         //繪製立方體(中心、尺寸)
         Gizmos.DrawCube(transform.position + transform.TransformDirection(v3TrackOffset), v3TrackSize);
+
+        Gizmos.color = new Color(0, 1, 0, 0.3f);
+        Gizmos.DrawCube(transform.position + transform.TransformDirection(v3AttackOffset), v3AttackSize);
+
     }
 
     private void Update()
@@ -84,8 +99,29 @@ public class Enemy : MonoBehaviour
         float distance = Vector3.Distance(target.position, transform.position);
         print("與目標的目標:" + distance);
 
-    }
 
+        if (distance < attactDistance)
+        {
+            rig.velocity = Vector3.zero;
+            Attack();
+        }
+    }
+    private void Attack()
+    {
+        if (timerAttack < attackCD)
+        {
+            timerAttack += Time.deltaTime;
+        }
+
+        else
+        {
+            ani.SetTrigger(parameterAttack);
+            timerAttack = 0;
+            Collider2D hit = Physics2D.OverlapBox(transform.position +
+            transform.TransformDirection(v3AttackOffset), v3AttackSize,0, layerTarget);
+            print("攻擊到物件:" + hit.name);
+        }
+    }
     #endregion
 
 }
